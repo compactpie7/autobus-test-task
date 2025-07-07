@@ -1,5 +1,5 @@
 // ui/createContactMenu.ts
-import { closeSideMenu } from './menuManager';
+import { closeSideMenu } from './menuManager.js';
 
 export function createContactMenu(): HTMLElement {
     const wrapper = document.createElement('div');
@@ -27,7 +27,11 @@ export function createContactMenu(): HTMLElement {
     submitBtn.type = 'submit';
     submitBtn.textContent = 'Создать';
 
-    form.append(nameInput, phoneInput, groupSelect, submitBtn);
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = 'Закрыть';
+    closeBtn.onclick = closeSideMenu;
+
+    form.append(nameInput, phoneInput, groupSelect, submitBtn, closeBtn);
 
     form.onsubmit = (e) => {
         e.preventDefault();

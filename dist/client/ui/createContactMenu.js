@@ -20,7 +20,10 @@ export function createContactMenu() {
     const submitBtn = document.createElement('button');
     submitBtn.type = 'submit';
     submitBtn.textContent = 'Создать';
-    form.append(nameInput, phoneInput, groupSelect, submitBtn);
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = 'Закрыть';
+    closeBtn.onclick = closeSideMenu;
+    form.append(nameInput, phoneInput, groupSelect, submitBtn, closeBtn);
     form.onsubmit = (e) => {
         e.preventDefault();
         console.log('Создан контакт:', {

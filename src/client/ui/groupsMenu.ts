@@ -1,5 +1,5 @@
 // ui/groupsMenu.ts
-import { closeSideMenu } from './menuManager';
+import { closeSideMenu } from './menuManager.js';
 
 export function createGroupsMenu(): HTMLElement {
     const wrapper = document.createElement('div');
