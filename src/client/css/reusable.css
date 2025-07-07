@@ -1,0 +1,35 @@
+.container {
+    max-width: 1160px;
+    margin: 0 auto;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.btn {
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: center;
+    background-color: var(--main-color);
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn:hover {
+    background-color: var(--secondary-color);
+}
