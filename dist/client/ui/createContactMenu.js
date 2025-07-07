@@ -1,5 +1,5 @@
 // ui/createContactMenu.ts
-import { closeSideMenu } from './menuManager';
+import { closeSideMenu } from './menuManager.js';
 export function createContactMenu() {
     const wrapper = document.createElement('div');
     wrapper.className = 'side-menu';
