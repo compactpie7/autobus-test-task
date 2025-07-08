@@ -1,6 +1,9 @@
 // ui/menuManager.ts
 export function openSideMenu(content) {
-    closeSideMenu(); // Remove existing menu
+    // Check if menu already opened
+    if (document.getElementById('side-menu-wrapper')) {
+        return; // Menu is open, do nothing
+    }
     const wrapper = document.createElement('div');
     wrapper.id = 'side-menu-wrapper';
     wrapper.appendChild(content);

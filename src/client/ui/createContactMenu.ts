@@ -2,6 +2,7 @@
 import { closeSideMenu } from './menuManager.js';
 import { CloseBtn } from '../components/closeBtn.js';
 import { Btn } from '../components/Btn.js';
+import { FormHeader } from '../components/FormHeader.js';
 
 export function createContactMenu(): HTMLElement {
     const wrapper = document.createElement('div');
@@ -22,14 +23,7 @@ export function createContactMenu(): HTMLElement {
 
     formBtnGroup.append(closeBtn, submitBtn)
 
-    const formHeader = document.createElement("div");
-    formHeader.className = "contact-side-menu-form-header"
-
-    const formTitle = document.createElement("h2");
-    formTitle.className = 'contact-side-menu-title'
-    formTitle.textContent = "Добавление контакта";
-
-    formHeader.append(formTitle, closeBtn)
+    const formHeader = FormHeader("Добавление контакта", closeSideMenu);
 
 
     const nameInput = document.createElement('input');

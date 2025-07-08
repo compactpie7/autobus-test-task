@@ -1,19 +1,23 @@
 // ui/menuManager.ts
 
 export function openSideMenu(content: HTMLElement) {
-    closeSideMenu(); // Remove existing menu
+    // Check if menu already opened
+    if (document.getElementById('side-menu-wrapper')) {
+        return; // Menu is open, do nothing
+    }
 
     const wrapper = document.createElement('div');
     wrapper.id = 'side-menu-wrapper';
     wrapper.appendChild(content);
 
-    const mainScreen = document.getElementById('main-screen')
-    mainScreen?.append(wrapper)
+    const mainScreen = document.getElementById('main-screen');
+    mainScreen?.append(wrapper);
 
     requestAnimationFrame(() => {
         wrapper.classList.add('open');
     });
 }
+
 
 export function closeSideMenu() {
     const existing = document.getElementById('side-menu-wrapper');
