@@ -5,7 +5,8 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('open-groups')?.addEventListener('click', () => {
         openSideMenu(createGroupsMenu());
     });
-    document.getElementById('open-create')?.addEventListener('click', () => {
-        openSideMenu(createContactMenu());
+    document.getElementById('open-create')?.addEventListener('click', async () => {
+        const menu = await createContactMenu(); // ✅ wait for the element
+        openSideMenu(menu); // ✅ now it's an HTMLElement
     });
 });

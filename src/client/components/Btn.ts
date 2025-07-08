@@ -6,7 +6,7 @@ export function Btn(
 ): HTMLButtonElement {
     const btn = document.createElement('button');
     if (className) {
-        btn.className = className + "btn";
+        btn.className = className;
     } else {
         btn.className = "btn"
     }

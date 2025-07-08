@@ -20,7 +20,7 @@
     font-weight: 700;
     text-align: center;
     background-color: var(--main-color);
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     border: none;
     outline: none;
     color: #FFFFFF;
@@ -39,7 +39,7 @@
     font-weight: 700;
     text-align: center;
     background-color: transparent;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     border: none;
     outline: none;
     color: var(--main-color);
@@ -56,7 +56,7 @@
 .close-btn {
     width: 24px;
     height: 24px;
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     cursor: pointer;
     border: none;
     outline: none;
@@ -88,4 +88,21 @@
 
 .close-btn:hover {
     background-color: rgba(0, 0, 0, .05);
+}
+
+
+.action-btn {
+    min-width: 38px;
+    min-height: 38px;
+    max-width: 38px;
+    max-height: 38px;
+    border-radius: var(--border-radius);
+    border: 2px solid rgba(0, 0, 0, .1);
+    outline: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
 }

@@ -1,7 +1,7 @@
 export function Btn(text, onClick, className, submit = false) {
     const btn = document.createElement('button');
     if (className) {
-        btn.className = className + "btn";
+        btn.className = className;
     }
     else {
         btn.className = "btn";

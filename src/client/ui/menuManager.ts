@@ -1,14 +1,13 @@
 // ui/menuManager.ts
 
 export function openSideMenu(content: HTMLElement) {
-    // Check if menu already opened
-    if (document.getElementById('side-menu-wrapper')) {
-        return; // Menu is open, do nothing
-    }
+    console.log('opening menu with:', content); // Add this line
+
+    if (document.getElementById('side-menu-wrapper')) return;
 
     const wrapper = document.createElement('div');
     wrapper.id = 'side-menu-wrapper';
-    wrapper.appendChild(content);
+    wrapper.appendChild(content); // 💥 Fails here if 'content' is not HTMLElement
 
     const mainScreen = document.getElementById('main-screen');
     mainScreen?.append(wrapper);
@@ -17,7 +16,6 @@ export function openSideMenu(content: HTMLElement) {
         wrapper.classList.add('open');
     });
 }
-
 
 export function closeSideMenu() {
     const existing = document.getElementById('side-menu-wrapper');
@@ -32,4 +30,3 @@ export function closeSideMenu() {
 
     existing.addEventListener('transitionend', handleTransitionEnd);
 }
-
