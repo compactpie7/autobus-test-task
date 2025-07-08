@@ -33,3 +33,59 @@
 .btn:hover {
     background-color: var(--secondary-color);
 }
+
+.btn-transparent {
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: center;
+    background-color: transparent;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    color: var(--main-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-transparent:hover {
+    background-color: var(--main-color-less-opacity);
+}
+
+.close-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    position: relative;
+    /* for positioning pseudo-elements */
+}
+
+/* The two lines forming the "X" */
+.close-btn::before,
+.close-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    background-color: var(--grey-color);
+    transform-origin: center;
+}
+
+.close-btn::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-btn::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, .05);
+}

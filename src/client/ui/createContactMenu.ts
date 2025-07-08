@@ -1,44 +1,106 @@
 // ui/createContactMenu.ts
 import { closeSideMenu } from './menuManager.js';
+import { CloseBtn } from '../components/closeBtn.js';
+import { Btn } from '../components/Btn.js';
 
 export function createContactMenu(): HTMLElement {
     const wrapper = document.createElement('div');
-    wrapper.className = 'side-menu';
+    wrapper.className = 'contact-side-menu side-menu';
 
     const form = document.createElement('form');
+    form.className = "contact-side-menu-form"
+
+    function someFunctionDoingQuery() { }
+
+    // Buttons
+    const submitBtn = Btn("Сохранить", someFunctionDoingQuery, "", true)
+
+    const closeBtn = CloseBtn(closeSideMenu)
+
+    const formBtnGroup = document.createElement('div');
+    formBtnGroup.className = "form-btn-group"
+
+    formBtnGroup.append(closeBtn, submitBtn)
+
+    const formHeader = document.createElement("div");
+    formHeader.className = "contact-side-menu-form-header"
+
+    const formTitle = document.createElement("h2");
+    formTitle.className = 'contact-side-menu-title'
+    formTitle.textContent = "Добавление контакта";
+
+    formHeader.append(formTitle, closeBtn)
+
 
     const nameInput = document.createElement('input');
     nameInput.type = 'text';
-    nameInput.placeholder = 'Имя';
+    nameInput.placeholder = 'Введите ФИО';
+    nameInput.className = "contact-side-menu-form-input";
+    nameInput.required = true;
 
     const phoneInput = document.createElement('input');
     phoneInput.type = 'text';
-    phoneInput.placeholder = 'Телефон';
+    phoneInput.placeholder = 'Введите номер';
+    phoneInput.className = "contact-side-menu-form-input";
+    phoneInput.required = true;
 
-    const groupSelect = document.createElement('select');
-    ['Друзья', 'Семья', 'Работа'].forEach(group => {
-        const option = document.createElement('option');
-        option.value = group;
+    // Custom dropdown setup
+    const groupDropdown = document.createElement('div');
+    groupDropdown.className = 'custom-dropdown contact-side-menu-form-input';
+
+    const selected = document.createElement('div');
+    selected.className = 'selected-option';
+    selected.textContent = 'Выберите группу';
+
+    const optionsContainer = document.createElement('div');
+    optionsContainer.className = 'options-container';
+
+    const groupOptions = ['Друзья', 'Семья', 'Работа']; //There should be an query to API with fetching groups
+    let selectedValue = '';
+
+    const hiddenInput = document.createElement('input');
+    hiddenInput.type = 'hidden';
+    hiddenInput.name = 'group'; // Make sure to match whatever your backend expects
+    groupDropdown.appendChild(hiddenInput);
+
+    groupOptions.forEach(group => { //This would change to map render with server queries
+        const option = document.createElement('div');
+        option.className = 'custom-option';
         option.textContent = group;
-        groupSelect.appendChild(option);
+        option.onclick = () => {
+            selected.textContent = group;
+            selectedValue = group;
+            hiddenInput.value = group;
+            optionsContainer.classList.remove('open');
+        };
+        optionsContainer.appendChild(option);
     });
 
-    const submitBtn = document.createElement('button');
-    submitBtn.type = 'submit';
-    submitBtn.textContent = 'Создать';
+    selected.onclick = () => {
+        optionsContainer.classList.toggle('open');
+        selected.classList.toggle('open');
+    };
 
-    const closeBtn = document.createElement('button');
-    closeBtn.textContent = 'Закрыть';
-    closeBtn.onclick = closeSideMenu;
+    groupDropdown.append(selected, optionsContainer);
 
-    form.append(nameInput, phoneInput, groupSelect, submitBtn, closeBtn);
+
+    form.append(formHeader, nameInput, phoneInput, groupDropdown, formBtnGroup);
+
+    function handleClickOutside(event: MouseEvent) {
+        if (!groupDropdown.contains(event.target as Node)) {
+            optionsContainer.classList.remove('open');
+            selected.classList.remove('open');
+        }
+    }
+
+    document.addEventListener('click', handleClickOutside);
 
     form.onsubmit = (e) => {
         e.preventDefault();
         console.log('Создан контакт:', {
             name: nameInput.value,
             phone: phoneInput.value,
-            group: groupSelect.value
+            group: selectedValue || null
         });
         closeSideMenu();
     };
