@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "watch": "tsc --watch"
+    "watch": "tsc --watch",
+    "server": "cd dist/server && node server.js"
   },
   "keywords": [],
   "author": "compact_pie7",

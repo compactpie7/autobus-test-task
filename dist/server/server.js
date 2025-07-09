@@ -2,7 +2,7 @@ import http from 'http';
 import fs from 'fs/promises';
 import path from 'path';
 import { URL } from 'url';
-const DB_PATH = path.resolve('./db.json');
+const DB_PATH = path.resolve('db.json');
 let db;
 async function loadDB() {
     try {

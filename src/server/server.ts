@@ -19,7 +19,7 @@ interface DB {
     groups: Group[];
 }
 
-const DB_PATH = path.resolve('./db.json');
+const DB_PATH = path.resolve('db.json');
 let db: DB;
 
 async function loadDB() {
