@@ -5,6 +5,7 @@ import { fetchGroups } from '../api/groupsApi.js';
 export async function createContactMenu() {
     const wrapper = document.createElement('div');
     wrapper.className = 'contact-side-menu side-menu';
+    const formHeader = FormHeader('Добавление контакта', closeSideMenu);
     const form = document.createElement('form');
     form.className = 'contact-side-menu-form';
     const nameInput = document.createElement('input');
@@ -61,8 +62,7 @@ export async function createContactMenu() {
     const formBtnGroup = document.createElement('div');
     formBtnGroup.className = 'form-btn-group';
     formBtnGroup.append(submitBtn);
-    const formHeader = FormHeader('Добавление контакта', closeSideMenu);
-    form.append(formHeader, nameInput, phoneInput, groupDropdown, formBtnGroup);
+    form.append(nameInput, phoneInput, groupDropdown, formBtnGroup);
     form.onsubmit = (e) => {
         e.preventDefault();
         console.log('Создан контакт:', {
@@ -78,6 +78,6 @@ export async function createContactMenu() {
             selected.classList.remove('open');
         }
     });
-    wrapper.appendChild(form);
+    wrapper.append(formHeader, form);
     return wrapper;
 }

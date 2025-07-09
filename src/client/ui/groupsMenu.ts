@@ -13,10 +13,10 @@ export function createGroupsMenu(): HTMLElement {
     ul.id = 'groups-list';
 
     const newGroupContainer = document.createElement('div');
-    newGroupContainer.style.marginTop = '10px';
+    newGroupContainer.className = 'groups-menu-confirm-form'
 
     const confirmAllChangesBtn = Btn("Сохранить", handleBulkSave, 'btn-transparent');
-    confirmAllChangesBtn.style.marginTop = '10px';
+    confirmAllChangesBtn.style.marginTop = 'var(--main-padding)';
     confirmAllChangesBtn.style.display = 'none';
 
     let modifiedGroups = new Map<number, string>();
@@ -27,25 +27,32 @@ export function createGroupsMenu(): HTMLElement {
         if (isAddingNewGroup) return;
 
         isAddingNewGroup = true;
+        addGroupBtn.style.display = 'none';
         newGroupContainer.innerHTML = '';
+        newGroupContainer.style = "margin-top: auto;"
+
 
         const input = document.createElement('input');
         input.type = 'text';
         input.placeholder = 'Введите название группы';
         input.className = 'side-menu-form-input';
-        input.style.marginRight = '8px';
 
         const confirmBtn = document.createElement('button');
         confirmBtn.textContent = 'Создать';
         confirmBtn.className = 'btn';
-        confirmBtn.style.marginRight = '8px';
 
         const cancelBtn = document.createElement('button');
         cancelBtn.textContent = 'Отмена';
         cancelBtn.className = 'btn-transparent';
 
-        newGroupContainer.append(input, confirmBtn, cancelBtn);
+        const groupsConfirmBtnGroup = document.createElement('div');
+        groupsConfirmBtnGroup.className = 'groups-confirm-btn-group'
+        groupsConfirmBtnGroup.append(confirmBtn, cancelBtn)
+
+        newGroupContainer.append(input, groupsConfirmBtnGroup);
         input.focus();
+
+        wrapper.append(newGroupContainer)
 
         confirmBtn.onclick = async () => {
             const groupName = input.value.trim();
@@ -59,6 +66,7 @@ export function createGroupsMenu(): HTMLElement {
                 await loadAndRenderGroups();
                 newGroupContainer.innerHTML = '';
                 isAddingNewGroup = false;
+                addGroupBtn.style.display = 'inline-block';
             } catch (e) {
                 alert('Ошибка при создании группы');
                 console.error(e);
@@ -66,12 +74,15 @@ export function createGroupsMenu(): HTMLElement {
         };
 
         cancelBtn.onclick = () => {
-            newGroupContainer.innerHTML = '';
+            newGroupContainer.remove()
             isAddingNewGroup = false;
+            addGroupBtn.style.display = 'inline-block';
         };
-    });
+    },
+        'groups-btn btn'
+    );
 
-    wrapper.append(formHeader, ul, addGroupBtn, newGroupContainer, confirmAllChangesBtn);
+    wrapper.append(formHeader, ul, addGroupBtn, confirmAllChangesBtn);
 
     async function loadAndRenderGroups() {
         try {

@@ -8,6 +8,8 @@ export async function createContactMenu(): Promise<HTMLElement> {
     const wrapper = document.createElement('div');
     wrapper.className = 'contact-side-menu side-menu';
 
+    const formHeader = FormHeader('Добавление контакта', closeSideMenu);
+
     const form = document.createElement('form');
     form.className = 'contact-side-menu-form';
 
@@ -76,10 +78,8 @@ export async function createContactMenu(): Promise<HTMLElement> {
     formBtnGroup.className = 'form-btn-group';
     formBtnGroup.append(submitBtn);
 
-    const formHeader = FormHeader('Добавление контакта', closeSideMenu);
 
     form.append(
-        formHeader,
         nameInput,
         phoneInput,
         groupDropdown,
@@ -103,6 +103,6 @@ export async function createContactMenu(): Promise<HTMLElement> {
         }
     });
 
-    wrapper.appendChild(form);
+    wrapper.append(formHeader, form);
     return wrapper;
 }
