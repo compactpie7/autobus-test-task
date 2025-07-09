@@ -89,3 +89,11 @@
     margin-right: auto;
     color: var(--black-color-less-opacity);
 }
+
+.no-contacts {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: var(--menu-padding) 0;
+    font-size: var(--bigger-font-size);
+}
