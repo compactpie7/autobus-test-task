@@ -20,7 +20,7 @@
     font-weight: 700;
     text-align: center;
     background-color: var(--main-color);
-    border-radius: 6px;
+    border-radius: var(--border-radius);
     border: none;
     outline: none;
     color: #FFFFFF;
@@ -32,4 +32,77 @@
 
 .btn:hover {
     background-color: var(--secondary-color);
+}
+
+.btn-transparent {
+    padding: 10px 14px;
+    font-weight: 700;
+    text-align: center;
+    background-color: transparent;
+    border-radius: var(--border-radius);
+    border: none;
+    outline: none;
+    color: var(--main-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-transparent:hover {
+    background-color: var(--main-color-less-opacity);
+}
+
+.close-btn {
+    width: 24px;
+    height: 24px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background-color: #ffffff;
+    position: relative;
+    /* for positioning pseudo-elements */
+}
+
+/* The two lines forming the "X" */
+.close-btn::before,
+.close-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 2px;
+    background-color: var(--grey-color);
+    transform-origin: center;
+}
+
+.close-btn::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.close-btn::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.close-btn:hover {
+    background-color: rgba(0, 0, 0, .05);
+}
+
+
+.action-btn {
+    min-width: 38px;
+    min-height: 38px;
+    max-width: 38px;
+    max-height: 38px;
+    border-radius: var(--border-radius);
+    border: 2px solid rgba(0, 0, 0, .1);
+    outline: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
 }

@@ -1,8 +1,17 @@
 :root {
     --main-color: #005BFE;
+    --main-color-less-opacity: rgba(0, 91, 254, 0.1);
     --secondary-color: #0047C6;
-    --main-red: #F81155;
-    --secondary-red: #D1003E;
-    --validation-red: #EA3D2F;
+    --main-red-color: #F81155;
+    --secondary-red-color: #D1003E;
+    --validation-red-color: #EA3D2F;
+    --black-color-less-opacity: rgba(0, 0, 0, .5);
+    --grey-color: #b3b3b3;
+
     --main-padding: 16px;
+    --font-size: 14px;
+    --bigger-font-size: 18px;
+    --border-radius: 6px;
+    --menu-padding: 24px;
+    --box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
 }
