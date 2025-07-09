@@ -8,20 +8,7 @@
 
 .contact-side-menu-title {
     font-weight: 700;
-    font-size: 18px;
-}
-
-.side-menu-form-input {
-    background-color: #f2f2f2;
-    border: none;
-    outline: none;
-    padding: 10px 12px;
-    width: 100%;
-    border-radius: var(--border-radius);
-}
-
-.side-menu-form-input::placeholder {
-    color: var(--black-color-less-opacity);
+    font-size: var(--bigger-font-size);
 }
 
 .custom-dropdown {

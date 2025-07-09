@@ -1,9 +1,16 @@
 // api/groupsApi.ts
 const API_BASE = 'http://localhost:3000'; // Adjust as needed
 
+export interface Contact {
+    id: number;
+    name: string;
+    phone: string;
+}
+
 export interface Group {
     id: number;
     name: string;
+    contacts: Contact[]; // ← Add this
 }
 
 export async function fetchGroups(): Promise<Group[]> {
@@ -37,3 +44,20 @@ export async function createGroup(name: string): Promise<Group> {
     if (!res.ok) throw new Error('Failed to create group');
     return res.json();
 }
+
+export async function deleteContact(groupId: number, contactId: number): Promise<void> {
+    const res = await fetch(`${API_BASE}/groups/${groupId}/contacts/${contactId}`, {
+        method: 'DELETE'
+    });
+    if (!res.ok) throw new Error('Failed to delete contact');
+}
+
+export async function updateContact(groupId: number, contactId: number, updatedData: { name: string; phone: string }) {
+    const res = await fetch(`${API_BASE}/groups/${groupId}/contacts/${contactId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData)
+    });
+    if (!res.ok) throw new Error('Failed to update contact');
+}
+

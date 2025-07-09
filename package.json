@@ -8,7 +8,9 @@
     "build": "tsc",
     "start": "node dist/index.js",
     "watch": "tsc --watch",
-    "server": "cd dist/server && node server.js"
+    "server": "cd dist/server && node server.js",
+    "copy-db": "cp src/server/db.json dist/server/db.json",
+    "copy-db": "xcopy src\\server\\db.json dist\\server\\ /Y"
   },
   "keywords": [],
   "author": "compact_pie7",

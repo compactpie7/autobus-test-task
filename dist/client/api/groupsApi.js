@@ -32,3 +32,19 @@ export async function createGroup(name) {
         throw new Error('Failed to create group');
     return res.json();
 }
+export async function deleteContact(groupId, contactId) {
+    const res = await fetch(`${API_BASE}/groups/${groupId}/contacts/${contactId}`, {
+        method: 'DELETE'
+    });
+    if (!res.ok)
+        throw new Error('Failed to delete contact');
+}
+export async function updateContact(groupId, contactId, updatedData) {
+    const res = await fetch(`${API_BASE}/groups/${groupId}/contacts/${contactId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(updatedData)
+    });
+    if (!res.ok)
+        throw new Error('Failed to update contact');
+}

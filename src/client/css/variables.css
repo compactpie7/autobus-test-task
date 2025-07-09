@@ -10,6 +10,8 @@
 
     --main-padding: 16px;
     --font-size: 14px;
+    --bigger-font-size: 18px;
     --border-radius: 6px;
     --menu-padding: 24px;
+    --box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.05);
 }
