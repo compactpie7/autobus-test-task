@@ -1,5 +1,3 @@
-// components/ActionBtn.ts
-
 type ActionType = "change" | "delete";
 
 const svgIcons: Record<ActionType, string> = {

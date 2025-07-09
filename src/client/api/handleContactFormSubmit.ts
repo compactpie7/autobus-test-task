@@ -41,16 +41,26 @@ export async function handleContactFormSubmit(
         errorMsg.textContent = 'Поле является обязательным';
         nameInput.after(errorMsg);
         hasError = true;
+    } else if (name.length > 25) {
+        nameInput.classList.add('error');
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'validation-error-message';
+        errorMsg.textContent = 'Длина должна быть не более 25 символов';
+        nameInput.after(errorMsg);
+        hasError = true;
     }
 
-    if (!phone) {
+    const phoneRegex = /^\+7\d{10}$/;
+
+    if (!phone || !phoneRegex.test(phone)) {
         phoneInput.classList.add('error');
         const errorMsg = document.createElement('div');
         errorMsg.className = 'validation-error-message';
-        errorMsg.textContent = 'Поле является обязательным';
+        errorMsg.textContent = 'Введите номер в формате +7XXXXXXXXXX';
         phoneInput.after(errorMsg);
         hasError = true;
     }
+
 
     if (!selectedGroupName && selected) {
         selected.classList.add('error');

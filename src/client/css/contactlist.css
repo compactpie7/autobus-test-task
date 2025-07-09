@@ -13,13 +13,19 @@
 }
 
 .contacts-container {
-    display: none;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    display: flex;
     flex-direction: column;
 }
 
 .contacts-container.open {
-    display: flex;
+    max-height: 1000px;
+    /* large enough to fit contents */
+    opacity: 1;
 }
+
 
 .accordeon-wrapper {
     padding: 0 var(--menu-padding);
@@ -88,6 +94,10 @@
 .contact-name {
     margin-right: auto;
     color: var(--black-color-less-opacity);
+}
+
+.contact-phone {
+    margin-right: calc(34px - var(--main-padding));
 }
 
 .no-contacts {

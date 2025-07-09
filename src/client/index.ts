@@ -9,8 +9,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.getElementById('open-create')?.addEventListener('click', async () => {
-        const menu = await createContactMenu(); // ✅ wait for the element
-        openSideMenu(menu); // ✅ now it's an HTMLElement
+        const menu = await createContactMenu();
+        openSideMenu(menu);
     });
 
     const mainScreen = document.getElementById('main-screen');

@@ -1,13 +1,11 @@
-// ui/menuManager.ts
-
 export function openSideMenu(content: HTMLElement) {
-    console.log('opening menu with:', content); // Add this line
+    console.log('opening menu with:', content);
 
     if (document.getElementById('side-menu-wrapper')) return;
 
     const wrapper = document.createElement('div');
     wrapper.id = 'side-menu-wrapper';
-    wrapper.appendChild(content); // 💥 Fails here if 'content' is not HTMLElement
+    wrapper.appendChild(content);
 
     const mainScreen = document.getElementById('main-screen');
     mainScreen?.append(wrapper);
