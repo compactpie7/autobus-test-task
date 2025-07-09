@@ -86,3 +86,23 @@
     margin-top: auto;
     margin-left: auto;
 }
+
+
+
+.side-menu-form-input.error,
+.custom-dropdown.error {
+    border: 1.5px solid var(--validation-red-color);
+    border-radius: 4px;
+}
+
+.contact-side-menu-form:has(.side-menu-form-input.error),
+.contact-side-menu-form:has(.custom-dropdown.error) {
+    gap: 37px;
+}
+
+
+.validation-error-message {
+    color: var(--validation-red-color);
+    font-size: 12px;
+    position: absolute;
+}

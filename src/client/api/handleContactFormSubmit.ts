@@ -11,14 +11,61 @@ export async function handleContactFormSubmit(
 ) {
     e.preventDefault();
 
+    // Clear previous errors
+    [nameInput, phoneInput].forEach(input => {
+        input.classList.remove('error');
+        const next = input.nextElementSibling;
+        if (next && next.classList.contains('validation-error-message')) {
+            next.remove();
+        }
+    });
+
+    const selected = document.querySelector('.custom-dropdown');
+    if (selected) {
+        selected.classList.remove('error');
+        const next = selected.nextElementSibling;
+        if (next && next.classList.contains('validation-error-message')) {
+            next.remove();
+        }
+    }
+
     const name = nameInput.value.trim();
     const phone = phoneInput.value.trim();
 
-    if (!name || !phone || !selectedGroupName) {
-        alert("Все поля обязательны");
-        return;
+    let hasError = false;
+
+    if (!name) {
+        nameInput.classList.add('error');
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'validation-error-message';
+        errorMsg.textContent = 'Поле является обязательным';
+        nameInput.after(errorMsg);
+        hasError = true;
     }
 
+    if (!phone) {
+        phoneInput.classList.add('error');
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'validation-error-message';
+        errorMsg.textContent = 'Поле является обязательным';
+        phoneInput.after(errorMsg);
+        hasError = true;
+    }
+
+    if (!selectedGroupName && selected) {
+        selected.classList.add('error');
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'validation-error-message';
+        errorMsg.textContent = 'Поле является обязательным';
+        if (!selected.nextElementSibling || !selected.nextElementSibling.classList.contains('validation-error-message')) {
+            selected.after(errorMsg);
+        }
+        hasError = true;
+    }
+
+    if (hasError) return;
+
+    // ✅ Proceed with API logic
     try {
         const groups = await fetchGroups();
         const targetGroup = groups.find(g => g.name === selectedGroupName);
@@ -39,7 +86,6 @@ export async function handleContactFormSubmit(
                     method: 'DELETE',
                 });
                 if (!deleted.ok) throw new Error('Не удалось удалить контакт из старой группы');
-
             } else {
                 const updated = await fetch(`http://localhost:3000/groups/${groupId}/contacts/${contact.id}`, {
                     method: 'PUT',
