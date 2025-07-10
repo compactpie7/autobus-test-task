@@ -13,7 +13,9 @@ then you need to open
 (live server recommended)
 
 In dev mode you can run 
-```npm run watch``` 
+```
+npm run watch
+``` 
 and changes you do to .ts files would automatically recompile in your dist folder
 
 
