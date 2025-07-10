@@ -12,13 +12,16 @@
     height: 100vh;
     background: #fff;
     box-shadow: 4px 0 10px rgba(0, 0, 0, 0.2);
-    transition: left 0.3s ease;
     padding: var(--menu-padding);
     z-index: 9999;
 }
 
 #side-menu-wrapper.open {
     left: 0;
+}
+
+#side-menu-wrapper.closing {
+    left: -320px;
 }
 
 .side-menu-form-header {
@@ -50,4 +53,13 @@
 
 .side-menu-form-input::placeholder {
     color: var(--black-color-less-opacity);
+}
+
+
+.blackout-show {
+    display: block;
+}
+
+.blackout-closing {
+    display: none;
 }

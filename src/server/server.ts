@@ -36,7 +36,6 @@ async function saveDB() {
     await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2));
 }
 
-// Utility to read JSON body
 async function getRequestBody(req: IncomingMessage): Promise<any> {
     return new Promise((resolve, reject) => {
         let body = '';

@@ -1,4 +1,3 @@
-// components/FormHeader.ts
 import { CloseBtn } from './closeBtn.js';
 
 export function FormHeader(title: string, onClose: () => void): HTMLElement {

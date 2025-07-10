@@ -43,7 +43,16 @@ body {
     padding: 24px var(--main-padding);
 }
 
+.main-container {
+    height: 100%;
+    padding: 56px var(--main-padding) 0;
+}
 
+.main-screen-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 /* BTN group */
 .header-btn-group {
@@ -55,6 +64,11 @@ body {
 .header-add-contact-btn {
     background-color: var(--main-red-color);
     gap: var(--main-padding);
+}
+
+.header-add-contact-btn.phone {
+    display: none;
+    width: 100%;
 }
 
 .header-add-contact-btn:hover {

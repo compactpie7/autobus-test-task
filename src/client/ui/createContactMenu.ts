@@ -2,7 +2,7 @@ import { closeSideMenu } from './menuManager.js';
 import { Btn } from '../components/Btn.js';
 import { FormHeader } from '../components/FormHeader.js';
 import { Contact, fetchGroups } from '../api/groupsApi.js';
-import { handleContactFormSubmit } from '../api/contactFormHandler.js';
+import { handleContactFormSubmit } from '../api/handleContactFormSubmit.js';
 
 export async function createContactMenu(contact?: Contact, groupId?: number): Promise<HTMLElement> {
     const wrapper = document.createElement('div');
@@ -12,6 +12,7 @@ export async function createContactMenu(contact?: Contact, groupId?: number): Pr
 
     const form = document.createElement('form');
     form.className = 'contact-side-menu-form';
+    form.noValidate = true;
 
     const nameInput = document.createElement('input');
     nameInput.type = 'text';
@@ -19,6 +20,10 @@ export async function createContactMenu(contact?: Contact, groupId?: number): Pr
     nameInput.className = 'side-menu-form-input';
     nameInput.required = true;
     nameInput.value = contact?.name ?? '';
+    nameInput.id = 'side-menu-form-input-name'
+
+    const nameInputWrapper = document.createElement('div');
+    nameInputWrapper.append(nameInput)
 
     const phoneInput = document.createElement('input');
     phoneInput.type = 'text';
@@ -26,9 +31,14 @@ export async function createContactMenu(contact?: Contact, groupId?: number): Pr
     phoneInput.className = 'side-menu-form-input';
     phoneInput.required = true;
     phoneInput.value = contact?.phone ?? '';
+    phoneInput.id = 'side-menu-form-input-phone'
+
+    const phoneInputWrapper = document.createElement('div');
+    phoneInputWrapper.append(phoneInput)
 
     const groupDropdown = document.createElement('div');
     groupDropdown.className = 'custom-dropdown side-menu-form-input';
+    groupDropdown.id = 'side-menu-form-input-select'
 
     const selected = document.createElement('div');
     selected.className = 'selected-option';
@@ -78,6 +88,10 @@ export async function createContactMenu(contact?: Contact, groupId?: number): Pr
 
     groupDropdown.append(hiddenInput, selected, optionsContainer);
 
+    const groupDropdownWrapper = document.createElement('div');
+    groupDropdownWrapper.style = 'position: relative;'
+    groupDropdownWrapper.append(groupDropdown)
+
     const submitBtn = Btn('Сохранить', undefined, '', true);
     const formBtnGroup = document.createElement('div');
     formBtnGroup.className = 'form-btn-group';
@@ -85,8 +99,7 @@ export async function createContactMenu(contact?: Contact, groupId?: number): Pr
 
     form.onsubmit = (e) => handleContactFormSubmit(e, contact, groupId, nameInput, phoneInput, selectedValue);
 
-
-    form.append(nameInput, phoneInput, groupDropdown, formBtnGroup);
+    form.append(nameInputWrapper, phoneInputWrapper, groupDropdownWrapper, formBtnGroup);
     wrapper.append(formHeader, form);
 
     document.addEventListener('click', (e) => {

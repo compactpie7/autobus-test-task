@@ -1,5 +1,6 @@
 import { deleteContact, fetchGroups } from '../api/groupsApi.js';
 import { ActionBtn } from '../components/ActionBtn.js';
+import { showConfirmationModal } from '../components/showConfirmationModal.js';
 import { formatPhone } from '../utils/formatPhone.js';
 import { createContactMenu } from './createContactMenu.js';
 import { openSideMenu } from './menuManager.js';
@@ -7,6 +8,12 @@ import { openSideMenu } from './menuManager.js';
 export async function renderContactsList(): Promise<HTMLElement> {
     const list = document.createElement('ul');
     list.className = 'contacts-list';
+
+    const mainScreenWrapper = document.createElement('div');
+    mainScreenWrapper.className = 'main-screen-wrapper'
+
+    const secondBtn: any = document.getElementById('open-create2');
+    console.log('secondBtn', secondBtn)
 
     try {
         const groups = await fetchGroups();
@@ -46,6 +53,9 @@ export async function renderContactsList(): Promise<HTMLElement> {
                     name.className = 'contact-name';
                     name.textContent = contact.name;
 
+                    const contactRowUiWrapper = document.createElement('div');
+                    contactRowUiWrapper.className = 'contact-row-ui-wrapper';
+
                     const phone = document.createElement('span');
                     phone.className = 'contact-phone';
                     phone.textContent = formatPhone(contact.phone);
@@ -55,23 +65,31 @@ export async function renderContactsList(): Promise<HTMLElement> {
                         openSideMenu(form);
                     });
 
-                    const remove = ActionBtn('delete', async () => {
-                        try {
-                            await deleteContact(group.id, contact.id);
-                            row.remove();
-                            if (!contacts.querySelector('.contact-row')) {
-                                const empty = document.createElement('div');
-                                empty.className = 'no-contacts';
-                                empty.textContent = 'Нет контактов';
-                                contacts.appendChild(empty);
+                    const remove = ActionBtn('delete', () => {
+                        showConfirmationModal(
+                            `Удалить контакт «${contact.name}»?`,
+                            'Контакт будет безвозвратно удалён из этой группы. Это действие нельзя отменить.',
+                            async () => {
+                                try {
+                                    await deleteContact(group.id, contact.id);
+                                    row.remove();
+                                    if (!contacts.querySelector('.contact-row')) {
+                                        const empty = document.createElement('div');
+                                        empty.className = 'no-contacts';
+                                        empty.textContent = 'Нет контактов';
+                                        contacts.appendChild(empty);
+                                    }
+                                } catch (e) {
+                                    console.error('Ошибка при удалении контакта:', e);
+                                    alert('Не удалось удалить контакт');
+                                }
                             }
-                        } catch (e) {
-                            console.error('Ошибка при удалении контакта:', e);
-                            alert('Не удалось удалить контакт');
-                        }
+                        );
                     });
 
-                    row.append(name, phone, change, remove);
+                    contactRowUiWrapper.append(phone, change, remove)
+
+                    row.append(name, contactRowUiWrapper);
                     contacts.appendChild(row);
                 });
             }
@@ -92,5 +110,7 @@ export async function renderContactsList(): Promise<HTMLElement> {
         list.textContent = 'Не удалось загрузить контакты';
     }
 
-    return list;
+    mainScreenWrapper.append(secondBtn, list)
+
+    return mainScreenWrapper;
 }

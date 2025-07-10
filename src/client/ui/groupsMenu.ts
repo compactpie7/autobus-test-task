@@ -3,6 +3,7 @@ import { FormHeader } from '../components/FormHeader.js';
 import { fetchGroups, updateGroup, deleteGroup, Group, createGroup } from '../api/groupsApi.js';
 import { Btn } from '../components/Btn.js';
 import { ActionBtn } from '../components/ActionBtn.js';
+import { showConfirmationModal } from '../components/showConfirmationModal.js';
 
 export function createGroupsMenu(): HTMLElement {
     const wrapper = document.createElement('div');
@@ -121,16 +122,22 @@ export function createGroupsMenu(): HTMLElement {
                 confirmAllChangesBtn.style.display = modifiedGroups.size > 0 ? 'block' : 'none';
             });
 
-            const deleteBtn = ActionBtn("delete", async () => {
-                if (!confirm(`Удалить группу "${group.name}"?`)) return;
-                try {
-                    await deleteGroup(group.id);
-                    await loadAndRenderGroups();
-                } catch (e) {
-                    alert('Ошибка при удалении');
-                    console.error(e);
-                }
+            const deleteBtn = ActionBtn("delete", () => {
+                showConfirmationModal(
+                    `Удалить группу «${group.name}»?`,
+                    'Удаление группы повлечет за собой удаление контактов связанных с этой группой',
+                    async () => {
+                        try {
+                            await deleteGroup(group.id);
+                            await loadAndRenderGroups();
+                        } catch (e) {
+                            alert('Ошибка при удалении');
+                            console.error(e);
+                        }
+                    }
+                );
             });
+
             deleteBtn.title = 'Удалить группу';
 
             li.append(input, deleteBtn);
