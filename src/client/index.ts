@@ -8,7 +8,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         openSideMenu(createGroupsMenu());
     });
 
+    console.log('first', document.getElementById('open-create'))
+    console.log('second', document.getElementById('open-create2'))
     document.getElementById('open-create')?.addEventListener('click', async () => {
+        const menu = await createContactMenu();
+        openSideMenu(menu);
+    });
+
+    document.getElementById('open-create2')?.addEventListener('click', async () => {
         const menu = await createContactMenu();
         openSideMenu(menu);
     });

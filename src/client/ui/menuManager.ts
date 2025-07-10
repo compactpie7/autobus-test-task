@@ -1,6 +1,4 @@
 export function openSideMenu(content: HTMLElement) {
-    console.log('opening menu with:', content);
-
     if (document.getElementById('side-menu-wrapper')) return;
 
     const wrapper = document.createElement('div');

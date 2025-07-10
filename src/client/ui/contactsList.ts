@@ -9,6 +9,12 @@ export async function renderContactsList(): Promise<HTMLElement> {
     const list = document.createElement('ul');
     list.className = 'contacts-list';
 
+    const mainScreenWrapper = document.createElement('div');
+    mainScreenWrapper.className = 'main-screen-wrapper'
+
+    const secondBtn: any = document.getElementById('open-create2');
+    console.log('secondBtn', secondBtn)
+
     try {
         const groups = await fetchGroups();
         if (groups.length === 0) {
@@ -47,6 +53,9 @@ export async function renderContactsList(): Promise<HTMLElement> {
                     name.className = 'contact-name';
                     name.textContent = contact.name;
 
+                    const contactRowUiWrapper = document.createElement('div');
+                    contactRowUiWrapper.className = 'contact-row-ui-wrapper';
+
                     const phone = document.createElement('span');
                     phone.className = 'contact-phone';
                     phone.textContent = formatPhone(contact.phone);
@@ -78,7 +87,9 @@ export async function renderContactsList(): Promise<HTMLElement> {
                         );
                     });
 
-                    row.append(name, phone, change, remove);
+                    contactRowUiWrapper.append(phone, change, remove)
+
+                    row.append(name, contactRowUiWrapper);
                     contacts.appendChild(row);
                 });
             }
@@ -99,5 +110,7 @@ export async function renderContactsList(): Promise<HTMLElement> {
         list.textContent = 'Не удалось загрузить контакты';
     }
 
-    return list;
+    mainScreenWrapper.append(secondBtn, list)
+
+    return mainScreenWrapper;
 }
