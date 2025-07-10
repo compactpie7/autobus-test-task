@@ -6,12 +6,12 @@ import { handleContactFormSubmit } from '../api/handleContactFormSubmit.js';
 
 export async function createContactMenu(contact?: Contact, groupId?: number): Promise<HTMLElement> {
     const wrapper = document.createElement('div');
-    wrapper.className = 'contact-side-menu side-menu';
+    wrapper.className = 'contacts-side-menu side-menu';
 
     const formHeader = FormHeader(contact ? 'Редактирование контакта' : 'Добавление контакта', closeSideMenu);
 
     const form = document.createElement('form');
-    form.className = 'contact-side-menu-form';
+    form.className = 'contacts-side-menu-form';
     form.noValidate = true;
 
     const nameInput = document.createElement('input');
