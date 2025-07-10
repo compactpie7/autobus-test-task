@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', async () => {
         const menu = await createContactMenu();
         openSideMenu(menu);
     });
-
     const mainScreen = document.getElementById('main-screen');
     if (!mainScreen) return;
 

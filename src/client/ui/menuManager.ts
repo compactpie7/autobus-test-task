@@ -5,6 +5,16 @@ export function openSideMenu(content: HTMLElement) {
     wrapper.id = 'side-menu-wrapper';
     wrapper.appendChild(content);
 
+    const blackout = document.createElement('button');
+    blackout.id = 'menu-blackout'
+    blackout.onclick = closeSideMenu
+    blackout.style = "opacity: 0.3; position: fixed; left: 0; top: 0; height: 100%; width: 100%; z-index: 8888; background-color: #000;"
+    blackout.disabled = false
+    const bodyDOM = document.body
+    blackout.classList.add("blackout-show");
+
+    bodyDOM.append(blackout)
+
     const mainScreen = document.getElementById('main-screen');
     mainScreen?.append(wrapper);
 
@@ -14,15 +24,23 @@ export function openSideMenu(content: HTMLElement) {
 }
 
 export function closeSideMenu() {
-    const existing = document.getElementById('side-menu-wrapper');
-    if (!existing) return;
+    const wrapper = document.getElementById('side-menu-wrapper');
+    if (!wrapper) return;
 
-    existing.classList.remove('open');
+    const blackout: HTMLButtonElement | any = document.getElementById('menu-blackout')
+    if (!blackout) return;
 
-    const handleTransitionEnd = () => {
-        existing.removeEventListener('transitionend', handleTransitionEnd);
-        existing.remove();
+    blackout.remove()
+    blackout.disabled = true
+
+    wrapper.classList.remove('open');
+    wrapper.classList.add('closing');
+
+    const onEnd = (event: TransitionEvent) => {
+        if (event.target !== wrapper) return;
+        wrapper.removeEventListener('transitionend', onEnd);
+        wrapper.remove();
     };
 
-    existing.addEventListener('transitionend', handleTransitionEnd);
+    wrapper.addEventListener('transitionend', onEnd);
 }
