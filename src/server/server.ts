@@ -24,6 +24,12 @@ let db: DB;
 
 async function loadDB() {
     try {
+        await fs.access(DB_PATH);
+    } catch {
+        await fs.writeFile(DB_PATH, JSON.stringify({ groups: [] }, null, 2));
+    }
+
+    try {
         const data = await fs.readFile(DB_PATH, 'utf-8');
         db = JSON.parse(data);
     } catch (e) {
@@ -31,6 +37,7 @@ async function loadDB() {
         db = { groups: [] };
     }
 }
+
 
 async function saveDB() {
     await fs.writeFile(DB_PATH, JSON.stringify(db, null, 2));
