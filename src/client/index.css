@@ -61,16 +61,16 @@ body {
     gap: var(--main-padding);
 }
 
-.header-add-contact-btn {
+.header-add-contacts-btn {
     background-color: var(--main-red-color);
     gap: var(--main-padding);
 }
 
-.header-add-contact-btn.phone {
+.header-add-contacts-btn.phone {
     display: none;
     width: 100%;
 }
 
-.header-add-contact-btn:hover {
+.header-add-contacts-btn:hover {
     background-color: var(--secondary-red-color);
 }

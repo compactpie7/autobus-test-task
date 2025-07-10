@@ -5,7 +5,7 @@ export function FormHeader(title: string, onClose: () => void): HTMLElement {
     header.className = 'side-menu-form-header';
 
     const h2 = document.createElement('h2');
-    h2.className = 'contact-side-menu-title';
+    h2.className = 'contacts-side-menu-title';
     h2.textContent = title;
 
     const closeButton = CloseBtn(() => onClose());

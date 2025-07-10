@@ -1,4 +1,4 @@
-.contact-side-menu-form {
+.contacts-side-menu-form {
     padding-top: var(--menu-padding);
     height: 100%;
     display: flex;
@@ -6,7 +6,7 @@
     gap: var(--main-padding);
 }
 
-.contact-side-menu-title {
+.contacts-side-menu-title {
     font-weight: 700;
     font-size: var(--bigger-font-size);
 }
@@ -87,16 +87,14 @@
     margin-left: auto;
 }
 
-
-
 .side-menu-form-input.error,
 .custom-dropdown.error {
     border: 1.5px solid var(--validation-red-color);
     border-radius: 4px;
 }
 
-.contact-side-menu-form:has(.side-menu-form-input.error),
-.contact-side-menu-form:has(.custom-dropdown.error) {
+.contacts-side-menu-form:has(.side-menu-form-input.error),
+.contacts-side-menu-form:has(.custom-dropdown.error) {
     gap: 37px;
 }
 

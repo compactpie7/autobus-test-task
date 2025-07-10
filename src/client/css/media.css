@@ -1,9 +1,9 @@
 @media(max-width: 500px) {
-    .header-add-contact-btn {
+    .header-add-contacts-btn {
         display: none;
     }
 
-    .header-add-contact-btn.phone {
+    .header-add-contacts-btn.phone {
         display: flex;
     }
 
@@ -15,17 +15,17 @@
         gap: 32px;
     }
 
-    .contact-row {
+    .contacts-row {
         flex-direction: column;
         align-items: flex-start;
         gap: var(--main-padding);
     }
 
-    .contact-row-ui-wrapper {
+    .contacts-row-ui-wrapper {
         width: 100%;
     }
 
-    .contact-phone {
+    .contacts-phone {
         margin-right: auto;
     }
 }

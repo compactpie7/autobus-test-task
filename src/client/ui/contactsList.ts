@@ -47,17 +47,17 @@ export async function renderContactsList(): Promise<HTMLElement> {
             } else {
                 group.contacts.forEach(contact => {
                     const row = document.createElement('div');
-                    row.className = 'contact-row';
+                    row.className = 'contacts-row';
 
                     const name = document.createElement('span');
-                    name.className = 'contact-name';
+                    name.className = 'contacts-name';
                     name.textContent = contact.name;
 
                     const contactRowUiWrapper = document.createElement('div');
-                    contactRowUiWrapper.className = 'contact-row-ui-wrapper';
+                    contactRowUiWrapper.className = 'contacts-row-ui-wrapper';
 
                     const phone = document.createElement('span');
-                    phone.className = 'contact-phone';
+                    phone.className = 'contacts-phone';
                     phone.textContent = formatPhone(contact.phone);
 
                     const change = ActionBtn('change', async () => {
@@ -73,7 +73,7 @@ export async function renderContactsList(): Promise<HTMLElement> {
                                 try {
                                     await deleteContact(group.id, contact.id);
                                     row.remove();
-                                    if (!contacts.querySelector('.contact-row')) {
+                                    if (!contacts.querySelector('.contacts-row')) {
                                         const empty = document.createElement('div');
                                         empty.className = 'no-contacts';
                                         empty.textContent = 'Нет контактов';

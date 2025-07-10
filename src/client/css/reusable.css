@@ -62,10 +62,8 @@
     outline: none;
     background-color: #ffffff;
     position: relative;
-    /* for positioning pseudo-elements */
 }
 
-/* The two lines forming the "X" */
 .close-btn::before,
 .close-btn::after {
     content: '';

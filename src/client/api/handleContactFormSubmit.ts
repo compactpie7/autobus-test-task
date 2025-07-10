@@ -11,7 +11,6 @@ export async function handleContactFormSubmit(
 ) {
     e.preventDefault();
 
-    // Clear previous errors
     [nameInput, phoneInput].forEach(input => {
         input.classList.remove('error');
         const next = input.nextElementSibling;
@@ -75,7 +74,6 @@ export async function handleContactFormSubmit(
 
     if (hasError) return;
 
-    // ✅ Proceed with API logic
     try {
         const groups = await fetchGroups();
         const targetGroup = groups.find(g => g.name === selectedGroupName);
